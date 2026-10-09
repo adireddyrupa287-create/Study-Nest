@@ -27,16 +27,16 @@ Use the registration screen. There are no pre-created/demo accounts. Passwords m
 - Private, revocable read-only share links; PDF export.
 - Import PDFs with selectable text and images with browser OCR. Extracted text is reviewed in the editor before use; original files are processed in the browser and are not stored by the API.
 - Speech-to-text where the browser supports Web Speech Recognition.
-- AI summary, Q&A, flashcard/quiz content, tag suggestion, and category suggestion when `OPENAI_API_KEY` is configured. AI responses are provider-generated and require your own API key.
+- AI summary, Q&A, flashcard/quiz content, tag suggestion, category suggestion, and meaning-based search through Gemini, OpenAI, or Groq compatible APIs. These features require a provider API key; Gemini is the default example configuration.
 
 ## Deploy to Render with Neon
 
 1. Push this folder to GitHub and connect the repository to Render as a Blueprint using `render.yaml`.
 2. Set `DATABASE_URL` on the Render web service to the connection string for the Neon `Study Nest` project. Keep the connection string secret; do not commit it.
-3. Render generates `JWT_SECRET_KEY`. Add `OPENAI_API_KEY` only if you want AI actions.
+3. Render generates `JWT_SECRET_KEY`. To enable Gemini AI actions, add `GEMINI_API_KEY` in the Render Environment settings. The Blueprint configures `AI_PROVIDER=gemini`, `AI_MODEL=gemini-2.5-flash`, and `AI_EMBEDDING_MODEL=gemini-embedding-001`. OpenAI and Groq can also be selected with `AI_PROVIDER=openai` or `AI_PROVIDER=groq` and their corresponding provider key/model.
 4. Deploy and check `https://<your-service>.onrender.com/api/health`.
 
-Required service environment values: `APP_ENV=production`, `DATABASE_URL`, and `JWT_SECRET_KEY`. `render.yaml` generates the JWT secret; Render reads `PORT` at runtime. The Docker container applies the committed Alembic migrations before Gunicorn starts.
+Required service environment values: `APP_ENV=production`, `DATABASE_URL`, and `JWT_SECRET_KEY`. `render.yaml` generates the JWT secret; Render reads `PORT` at runtime. AI is optional; for Gemini, set `AI_PROVIDER=gemini` and `GEMINI_API_KEY`. The Docker container applies the committed Alembic migrations before Gunicorn starts.
 
 ## API overview
 

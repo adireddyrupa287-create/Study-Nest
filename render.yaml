@@ -8,11 +8,15 @@ services:
     envVars:
       - key: APP_ENV
         value: production
+      - key: AI_PROVIDER
+        value: gemini
+      - key: AI_MODEL
+        value: gemini-2.5-flash
+      - key: AI_EMBEDDING_MODEL
+        value: gemini-embedding-001
+      - key: GEMINI_API_KEY
+        sync: false
       - key: DATABASE_URL
         sync: false
       - key: JWT_SECRET_KEY
         generateValue: true
-      - key: OPENAI_API_KEY
-        sync: false
-      - key: OPENAI_MODEL
-        value: gpt-4o-mini

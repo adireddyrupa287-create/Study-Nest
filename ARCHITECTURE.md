@@ -6,7 +6,7 @@
 - **Backend:** Python Flask REST API.
 - **Authentication:** signed JWT access tokens with an eight-hour lifetime. The browser stores the token in session storage and sends it as a Bearer token.
 - **Database:** SQLAlchemy models use PostgreSQL in production and SQLite for local setup. The service refuses to start in production without `DATABASE_URL` and a 32-character `JWT_SECRET_KEY`.
-- **AI:** OpenAI calls run only in Flask, and require `OPENAI_API_KEY`. AI is optional; core notes features work without it.
+- **AI:** OpenAI-compatible Gemini, OpenAI, or Groq calls run only in Flask. `AI_PROVIDER` selects the provider; keys stay server-side (`GEMINI_API_KEY`, `OPENAI_API_KEY`, or `GROQ_API_KEY`). Gemini supports chat and semantic-search embeddings. AI is optional; core notes features work without it.
 - **Deployment:** one Render Docker web service. A Node build stage compiles React; a Python stage runs Flask with Gunicorn. A separate persistent Render PostgreSQL database is required.
 
 ## Data model
