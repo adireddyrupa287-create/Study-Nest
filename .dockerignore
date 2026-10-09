@@ -1,0 +1,10 @@
+.git
+.env
+.venv
+venv
+node_modules
+backend/instance
+backend/__pycache__
+backend/tests
+*.db
+npm-debug.log
