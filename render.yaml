@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: ai-notes-organizer
+    name: study-nest
     runtime: docker
     dockerfilePath: ./Dockerfile
     dockerContext: .

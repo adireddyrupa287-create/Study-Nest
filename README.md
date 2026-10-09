@@ -1,4 +1,4 @@
-# AI Notes Organizer
+# Study Nest — AI Notes Organizer
 
 A beginner-friendly notes app with a React/Vite frontend and a Flask REST API. Flask serves the built frontend so the first Render deployment can use one web service. User records are separated by ownership checks in every API query. Passwords are hashed, and protected API requests require a signed JWT.
 
@@ -29,17 +29,14 @@ Use the registration screen. There are no pre-created/demo accounts. Passwords m
 - Speech-to-text where the browser supports Web Speech Recognition.
 - AI summary, Q&A, flashcard/quiz content, tag suggestion, and category suggestion when `OPENAI_API_KEY` is configured. AI responses are provider-generated and require your own API key.
 
-## Deploy to Render
+## Deploy to Render with Neon
 
-1. Push this folder to a GitHub repository and connect the repository to Render.
-2. Choose **Blueprint** and select `render.yaml`. The Dockerfile builds the React frontend with Node and runs the Flask API with Python in one container.
-3. Create a Render PostgreSQL database and set its internal connection string as `DATABASE_URL` on the web service. The database is required in production because the web service's local filesystem is not durable across deploys.
-4. Render generates `JWT_SECRET_KEY`. Add `OPENAI_API_KEY` only if you want AI actions.
-5. Deploy and check `https://<your-service>.onrender.com/api/health`.
+1. Push this folder to GitHub and connect the repository to Render as a Blueprint using `render.yaml`.
+2. Set `DATABASE_URL` on the Render web service to the connection string for the Neon `Study Nest` project. Keep the connection string secret; do not commit it.
+3. Render generates `JWT_SECRET_KEY`. Add `OPENAI_API_KEY` only if you want AI actions.
+4. Deploy and check `https://<your-service>.onrender.com/api/health`.
 
-Required service environment values: `APP_ENV=production`, `DATABASE_URL`, and `JWT_SECRET_KEY`. `render.yaml` generates the JWT secret; Render reads `PORT` at runtime.
-
-No live deployment has been performed from this workspace: it needs a connected Git provider, Render account, and database URL. Render configuration is prepared in `render.yaml`.
+Required service environment values: `APP_ENV=production`, `DATABASE_URL`, and `JWT_SECRET_KEY`. `render.yaml` generates the JWT secret; Render reads `PORT` at runtime. The Docker container applies the committed Alembic migrations before Gunicorn starts.
 
 ## API overview
 
